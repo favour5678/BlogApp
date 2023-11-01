@@ -2,7 +2,7 @@ import { HomePage } from "./pages/HomePage";
 
 function App() {
   return (
-    <section>
+    <section className="bg-[#F3EFEF] h-screen font-body">
       <HomePage />
     </section>
   );
