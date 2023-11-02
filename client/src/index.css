@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.button {
+    @apply px-4 py-[5px] bg-[#CCCCCC] hover:bg-[#AAAAAA] duration-300 rounded;
+}
