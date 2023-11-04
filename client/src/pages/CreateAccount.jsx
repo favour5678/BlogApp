@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 
 export const CreateAccount = () => {
   return (
-    <main>
+    <main className="h-screen">
       <Navbar />
       <div className="mt-32">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">

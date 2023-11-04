@@ -1,10 +1,10 @@
 import React from "react";
 import { Navbar } from "../components/Navbar";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   return (
-    <main>
+    <main className="h-screen">
       <Navbar />
       <div className="mt-28">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
@@ -41,8 +41,8 @@ export const Login = () => {
 
           <div className="mt-6">
             <p className="text-sm">
-              Don't have an account?{" "}
-              <Link to={'/createAccount'} className="font-semibold">
+              Don't have an account?
+              <Link to={"/createAccount"} className="font-semibold">
                 Create Account
               </Link>
             </p>
