@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
 import { BlogContent } from './BlogContent'
+import { Footer } from '../components/Footer'
 
 
 export const HomePage = () => {
@@ -15,10 +16,13 @@ export const HomePage = () => {
           <li className='list'>Music</li>
           <li className='list'>Sports</li>
           <li className='list'>News</li>
+          <li className='list'>Business</li>
+          <li className='list'>Security</li>
         </ul>
         <div>
           <BlogContent />
         </div>
+        <Footer />
       </div>
     </main>
   )
