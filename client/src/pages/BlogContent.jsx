@@ -20,11 +20,11 @@ export const BlogContent = () => {
             <img src={blog.image} alt="blog-image" />
           </p>
           <p>{blog.title}</p>
-          {blog.content.map((paragraph, index) => (
+          {/* {blog.content.map((paragraph, index) => (
             <p key={index} className="mb-1">
               {paragraph}
             </p>
-          ))}
+          ))} */}
         </div>
       ))}
     </main>
