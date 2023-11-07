@@ -72,7 +72,7 @@ export const blogPosts = [
     },
     {
         id: 7,
-        image: "https://im3.ezgif.com/tmp/ezgif-3-9cede50ecc.jpg",
+        image: "https://ychef.files.bbci.co.uk/976x549/p0gg7ksv.jpg",
         title: "Retailers from JCPenney to Tiffany & Co are funnelling huge sums into store renovations. They're hoping massive makeovers will drive shoppers to spend.",
         category: "business",
         content: `At JCPenney stores across the US, shoppers may notice a fresh paint smell, better lighting and shiny new signage – with even more improvements planned for the coming months. Centralised checkout counters are replacing registers once spread across multiple departments, and posters promise a "new and improved shopping experience" once the remodels are complete. Change is afoot at the retailer, and not just in the form of upgraded carpet (though that, too, is on the list).
@@ -85,11 +85,10 @@ export const blogPosts = [
     },
     {
         id: 8,
-        image: "https://im5.ezgif.com/tmp/ezgif-5-e0bbce6744.jpg",
+        image: "https://ychef.files.bbci.co.uk/1280x720/p0gfblgf.jpg",
         title: "Business in Russia: Why some firms haven't left",
         category: "business",
-        content: `W
-        When the first airstrikes fell on Ukraine in February 2022, corporate executives with operations or holdings in Russia were forced to pick a side. This decision had significant implications. Russia remains a major business market, with a population of 145 million; its 2022 GDP was a staggering $2.24tn (£1.81tn), right behind France. Fleeing companies would leave a lot of revenue on the table.
+        content: `When the first airstrikes fell on Ukraine in February 2022, corporate executives with operations or holdings in Russia were forced to pick a side. This decision had significant implications. Russia remains a major business market, with a population of 145 million; its 2022 GDP was a staggering $2.24tn (£1.81tn), right behind France. Fleeing companies would leave a lot of revenue on the table.
         Yet amid a gruelling war, with tens of thousands of civilian casualties and widespread international condemnation of Russia, companies risked severe reputational damage by staying put. Plus, a mix of international pressure, sanctions and risks of Russian government interference offered strong reasons for companies to leave when the conflict began.
         "Some decided to stay, some decided to go very quickly, and some dragged their feet," says Roman Sidortsov, an associate professor of energy policy at Michigan Technological University, US, who practised corporate law and taught in Russia.
         One of the biggest companies to pull out almost immediately was British Petroleum, which exited just three days after the conflict began. By 1 March, BMW also announced it would halt Russian production and imports. And after first announcing a plan to leave Russia in March 2022, Heineken sold off its Russian business to Russian packaging firm Arnest for a single euro this August, taking a €300m ($319m; £257m) loss on the division.
