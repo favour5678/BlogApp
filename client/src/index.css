@@ -12,3 +12,7 @@
 .list {
     @apply hover:underline underline-offset-4;
 }
+
+.h2 {
+    @apply font-semibold text-lg;
+}
