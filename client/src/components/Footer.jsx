@@ -39,7 +39,7 @@ export const Footer = () => {
           </span>
         </div>
       </div>
-        <p className="text-center font-semibold border-t py-4 border-[#888888]">Copyright &copy; F.A</p>
+      <p className="text-center font-semibold border-t py-4 border-[#888888]">Copyright &copy; F.A</p>
     </footer>
   );
 };

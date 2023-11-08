@@ -1,17 +1,17 @@
 import React from "react";
-import { blogPosts } from "../data/blogData";
 
-export const BlogContent = () => {
-  const splitContent = (content) => {
-    // return content.split('. ').map(paragraph => paragraph + '.')
-    return content.split("\n").map((paragraph) => paragraph.trim());
-  };
+export const BlogContent = ({blogs}) => {
+  // const splitContent = (content) => {
+  //   // return content.split('. ').map(paragraph => paragraph + '.')
+  //   return content.split("\n").map((paragraph) => paragraph.trim());
+  // };
 
-  const updatedBlogPosts = blogPosts.map((post) => ({
-    ...post,
-    content: splitContent(post.content),
-  }));
-  console.log(updatedBlogPosts);
+  // const updatedBlogPosts = blogPosts.map((post) => ({
+  //   ...post,
+  //   content: splitContent(post.content),
+  // }));
+  // console.log(updatedBlogPosts);
+  // console.log(blogPosts)
 
   const currentDate = new Date();
 
@@ -21,12 +21,12 @@ export const BlogContent = () => {
 
   return (
     <main className="grid grid-cols-3 gap-x-6 gap-y-12 px-10">
-      {updatedBlogPosts.map((post) => (
+      {blogs.map((post) => (
         <div key={post.id} className="w-full">
           <p>
             <img
               src={post.image}
-              alt="post-image"
+              alt="post-img"
               className="h-72 w-full object-cover object-center rounded-md"
             />
           </p>
@@ -42,11 +42,11 @@ export const BlogContent = () => {
       ))}
     </main>
   );
-};
-{
+}
+
   /* {blog.content.map((paragraph, index) => (
             <p key={index} className="mb-1">
               {paragraph}
             </p>
           ))} */
-}
+
