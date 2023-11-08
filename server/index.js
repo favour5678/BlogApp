@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World how are you doing?')
+
+app.get('/register', (req, res) => {
+    // res.send('Hello World, ')
+    res.json('This is the register page')
 })
+
 
 app.listen(4000)

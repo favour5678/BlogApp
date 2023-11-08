@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 
 export const CreateAccount = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <main className="h-screen">
       <Navbar />
