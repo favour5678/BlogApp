@@ -34,7 +34,7 @@ export const BlogContent = ({ blogs }) => {
           </h2>
           <Link to={`/blogs/${post.id}`} className="pt-2">
             {post.content[0]}{' '} 
-            <small className="text-sm font-semibold">Read More....</small>
+            <small className="text-sm font-semibold hover:underline underline-offset-2">Read More....</small>
           </Link>
         </div>
       ))}
