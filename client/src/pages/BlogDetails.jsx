@@ -28,6 +28,7 @@ export const BlogDetails = ({ blogPosts }) => {
               {selectedPost.title}
             </h2>
             <p>{`${day}-${month}-${year}`}</p>
+            <p className="font-semibold text-sm">By @F.A</p>
             <p className="w-[60%] my-8 mx-auto">
               <img
                 src={selectedPost.image}
