@@ -1,17 +1,16 @@
 import React from "react";
 
 export const BlogContent = ({blogs}) => {
-  // const splitContent = (content) => {
-  //   // return content.split('. ').map(paragraph => paragraph + '.')
-  //   return content.split("\n").map((paragraph) => paragraph.trim());
-  // };
+  const splitContent = (content) => {
+    // return content.split('. ').map(paragraph => paragraph + '.')
+    return content.split("\n").map((paragraph) => paragraph.trim());
+  };
 
-  // const updatedBlogPosts = blogPosts.map((post) => ({
-  //   ...post,
-  //   content: splitContent(post.content),
-  // }));
-  // console.log(updatedBlogPosts);
-  // console.log(blogPosts)
+  const updatedBlogPosts = blogs.map((post) => ({
+    ...post,
+    content: splitContent(post.content),
+  }));
+  console.log(updatedBlogPosts);
 
   const currentDate = new Date();
 
@@ -21,7 +20,7 @@ export const BlogContent = ({blogs}) => {
 
   return (
     <main className="grid grid-cols-3 gap-x-6 gap-y-12 px-10">
-      {blogs.map((post) => (
+      {updatedBlogPosts.map((post) => (
         <div key={post.id} className="w-full">
           <p>
             <img
