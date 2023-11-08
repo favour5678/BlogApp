@@ -3,6 +3,8 @@ import { HomePage } from '../pages/HomePage'
 import { About } from '../pages/About'
 import { Login } from '../pages/Login'
 import { CreateAccount } from '../pages/CreateAccount'
+import { BlogDetails } from '../pages/BlogDetails'
+import { blogPosts } from '../data/blogData'
 
 export const router = createBrowserRouter([
     {
@@ -20,5 +22,9 @@ export const router = createBrowserRouter([
     {
         path: '/createAccount',
         element: <CreateAccount />
+    },
+    {
+        path: '/blogs/:id',
+        element: <BlogDetails blogPosts={ blogPosts } />
     }
 ])

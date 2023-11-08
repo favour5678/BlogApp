@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const BlogContent = ({blogs}) => {
+export const BlogContent = ({ blogs }) => {
   const splitContent = (content) => {
-    // return content.split('. ').map(paragraph => paragraph + '.')
     return content.split("\n").map((paragraph) => paragraph.trim());
   };
 
@@ -10,7 +10,6 @@ export const BlogContent = ({blogs}) => {
     ...post,
     content: splitContent(post.content),
   }));
-  console.log(updatedBlogPosts);
 
   const currentDate = new Date();
 
@@ -33,19 +32,13 @@ export const BlogContent = ({blogs}) => {
           <h2 className="font-semibold text-lg pt-2 tracking-wide">
             {post.title}
           </h2>
-          <p className="pt-2">
+          <Link to={`/blogs/${post.id}`} className="pt-2">
             {post.content[0]}{' '} 
             <small className="text-sm font-semibold">Read More....</small>
-          </p>
+          </Link>
         </div>
       ))}
     </main>
   );
 }
-
-  /* {blog.content.map((paragraph, index) => (
-            <p key={index} className="mb-1">
-              {paragraph}
-            </p>
-          ))} */
 
