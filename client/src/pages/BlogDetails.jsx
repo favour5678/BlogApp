@@ -23,12 +23,12 @@ export const BlogDetails = ({ blogPosts }) => {
       <Navbar />
       {selectedPost && (
         <article className="container mx-auto w-[90%] mt-10">
-          <div className="flex flex-col justify-center items-center">
+          <div className="text-center">
             <h2 className="font-bold text-2xl tracking-wide">
               {selectedPost.title}
             </h2>
             <p>{`${day}-${month}-${year}`}</p>
-            <p className="w-[60%] my-8">
+            <p className="w-[60%] my-8 mx-auto">
               <img
                 src={selectedPost.image}
                 alt="post-img"
@@ -36,7 +36,7 @@ export const BlogDetails = ({ blogPosts }) => {
               />
             </p>
             {splitContent(selectedPost.content).map((paragraph, index) => (
-              <p key={index} className="tracking-wide mt-1">
+              <p key={index} className="tracking-wide mt-2 text-left">
                 {paragraph}
               </p>
             ))}
