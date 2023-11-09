@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors')
 
 app.get('/register', (req, res) => {
     // res.send('Hello World, ')
