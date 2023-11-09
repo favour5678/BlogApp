@@ -5,12 +5,28 @@ export const CreateAccount = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const register = async(e) => {
+    e.preventDefault()
+    const values = {email, password}
+    try {
+      const response = await fetch('http://localhost:4000', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(values)
+      });
+
+
+    } catch(error) {
+      console.error('Error', error);
+    }
+  }
+
   return (
     <main className="h-screen">
       <Navbar />
       <div className="mt-32">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
-          <form>
+          <form onSubmit={register}>
             <div className="mb-4">
               <label htmlFor="email" className="font-semibold text-lg">
                 Email
@@ -20,6 +36,8 @@ export const CreateAccount = () => {
                 name="email"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Your Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-8">
@@ -31,6 +49,8 @@ export const CreateAccount = () => {
                 name="password"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
             <button
