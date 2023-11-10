@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 
 export const CreateAccount = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const register = async(e) => {
     e.preventDefault()
-    const values = {email, password}
+    const values = {username, password}
 
     const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
@@ -30,16 +30,16 @@ export const CreateAccount = () => {
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
           <form onSubmit={register}>
             <div className="mb-4">
-              <label htmlFor="email" className="font-semibold text-lg">
-                Email
+              <label htmlFor="username" className="font-semibold text-lg">
+                Username
               </label>
               <input
-                type="email"
-                name="email"
+                type="text"
+                name="username"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
-                placeholder="Your Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                placeholder="Your Username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
               />
             </div>
             <div className="mb-8">
