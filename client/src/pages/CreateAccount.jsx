@@ -2,48 +2,30 @@ import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 
 export const CreateAccount = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  // const handleRegister = async(e) => {
-  //   e.preventDefault()
-  //   const values = {username, password}
-
-  //   const response = await fetch('http://localhost:4000/register', {
-  //     method: 'POST',
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: JSON.stringify(values)
-  //   });
-
-  //   if(response.ok === 200) {
-  //     console.log('Registration successful')
-  //   } else {
-  //     console.error('Registration failed')
-  //   }
-  
-  // }
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleRegister = async (e) => {
-    e.preventDefault()
-    const values = {username, password}
+    e.preventDefault();
+    const values = { username, password };
 
     try {
-      const response = await fetch('http://localhost:4000/register', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
-    });
+      const response = await fetch("http://localhost:4000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
 
-    if(response.ok === 200) {
-      console.log('Registration successful')
-    } else {
-      const errorData = await response.json()
-      console.error('Registration failed:', errorData.message)
+      if (response.ok === 200) {
+        console.log("Registration successful");
+      } else {
+        const errorData = await response.json();
+        console.error("Registration failed:", errorData.message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
     }
-    } catch(error) {
-      console.error('Error:', error.message)
-    }
-  }
+  };
 
   return (
     <main className="h-screen">
@@ -61,7 +43,7 @@ export const CreateAccount = () => {
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Your Username"
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="mb-8">
@@ -74,7 +56,7 @@ export const CreateAccount = () => {
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
