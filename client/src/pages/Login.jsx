@@ -10,14 +10,14 @@ export const Login = () => {
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
           <form>
             <div className="mb-4">
-              <label htmlFor="email" className="font-semibold text-lg">
-                Email
+              <label htmlFor="username" className="font-semibold text-lg">
+                Username
               </label>
               <input
-                type="email"
-                name="email"
+                type="text"
+                name="username"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
-                placeholder="Your Email"
+                placeholder="Your Username"
               />
             </div>
             <div className="mb-8">

@@ -5,22 +5,44 @@ export const CreateAccount = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const register = async(e) => {
+  // const handleRegister = async(e) => {
+  //   e.preventDefault()
+  //   const values = {username, password}
+
+  //   const response = await fetch('http://localhost:4000/register', {
+  //     method: 'POST',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: JSON.stringify(values)
+  //   });
+
+  //   if(response.ok === 200) {
+  //     console.log('Registration successful')
+  //   } else {
+  //     console.error('Registration failed')
+  //   }
+  
+  // }
+
+  const handleRegister = async(e) => {
     e.preventDefault()
     const values = {username, password}
 
-    const response = await fetch('http://localhost:4000/register', {
+    try {
+      const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values)
     });
 
-    if(response.status === 200) {
+    if(response.ok === 200) {
       console.log('Registration successful')
     } else {
-      console.error('Registration failed')
+      const errorData = await response.json()
+      console.error('Registration failed:', errorData.message)
     }
-  
+    } catch(error) {
+      console.error('Error:', error.message)
+    }
   }
 
   return (
@@ -28,7 +50,7 @@ export const CreateAccount = () => {
       <Navbar />
       <div className="mt-32">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
-          <form onSubmit={register}>
+          <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label htmlFor="username" className="font-semibold text-lg">
                 Username
