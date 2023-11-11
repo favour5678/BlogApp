@@ -1,36 +1,24 @@
 const express = require('express');
 const cors = require('cors');
-const { default: mongoose } = require('mongoose');
 const UserModel = require('./models/UserModel');
-// const User = require('./models/UserModel');
 const bcrypt = require('bcrypt');
 const port = 4000;
 
-// const salt = bcrypt.genSaltSync(10);
-
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(express.json())
 
-
-// mongoose.connect('mongodb+srv://blog:p2000oSxycAQePoz@cluster0.jqgb6sg.mongodb.net/?retryWrites=true&w=majority')
+const { default: mongoose } = require('mongoose');
 mongoose.connect('mongodb+srv://blog:p2000oSxycAQePoz@cluster0.jqgb6sg.mongodb.net/test')
+let db = mongoose.connection;
+db.once('open', function() {
+    console.log('DATABASE CONNECTED')
+})
 
 
-// app.post('/register', async(req, res) => {
-//     const { username, password } = req.body;
 
-//     try {
-//         const user = await UserModel.create({username, password: bcrypt.hashSync(password, salt)})
-//     res.json(user);
-//     } catch(error) {
-//         console.log(error.message)
-//         res.status(400).json(error.message)
-//     }
-// })
-
-app.post('/register', async(req, res) => {
+app.post('/register', async (req, res) => {
     const { username, password } = req.body;
 
     try{
@@ -45,16 +33,22 @@ app.post('/register', async(req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        // const newUser = await UserModel.create({ username, password: hashedPassword})
-        const newUser = new UserModel({ username, password: hashedPassword})
-        await newUser.save()
+        const newUser = await UserModel.create({ username, password: hashedPassword})
         res.status(201).json(newUser)
     } catch(error) {
         console.error(error.message)
+        res.status(500).json({ message: 'Internal server error' });
     }
 })
+
+
+// app.post('/login', async (req, res) => {
+
+// })
+
 
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
+  

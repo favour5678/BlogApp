@@ -23,7 +23,7 @@ export const CreateAccount = () => {
   
   // }
 
-  const handleRegister = async(e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
     const values = {username, password}
 
