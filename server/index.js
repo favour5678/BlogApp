@@ -3,10 +3,13 @@ const cors = require('cors');
 const UserModel = require('./models/UserModel');
 const bcrypt = require('bcrypt');
 const port = 4000;
+const jwt = require('jsonwebtoken')
+
+const secretKey = 'abcdefghijklmnop'
 
 const app = express();
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json())
 
 const { default: mongoose } = require('mongoose');
@@ -56,7 +59,9 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' })
         }
 
-        res.status(200).json({ message: 'Login successful' })
+        const token = jwt.sign({ userId: user._id}, secretKey, )
+
+        res.cookie('token', token).json({ message: 'Login successful', token })
     } catch(error) {
         console.error(error.message);
     }
