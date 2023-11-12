@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -16,8 +18,10 @@ export const CreateAccount = () => {
         body: JSON.stringify(values),
       });
 
-      if (response.ok === 200) {
+      if (response.status === 200) {
         console.log("Registration successful");
+        return navigate('/login')
+
       } else {
         const errorData = await response.json();
         console.error("Registration failed:", errorData.message);
