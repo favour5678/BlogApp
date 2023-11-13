@@ -1,16 +1,12 @@
 const cors = require('cors');
 const express = require('express');
 const port = 4000;
+const cookieParser = require('cookie-parser')
 
 const registerRoute = require('./routes/RegisterRoute');
 const loginRoute = require('./routes/loginRoute');
 
 const app = express();
-// const routes = app.use(express.Router())
-
-// routes.get('/socket', function(req, res) {
-//     return res.send('Alerted')
-//   });
 
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json())
@@ -24,6 +20,11 @@ db.once('open', function() {
 
 app.use('/register', registerRoute)
 app.use('/login', loginRoute)
+app.use(cookieParser())
+
+app.get('/profile', (req, res) => {
+    res.json(req.cookies)
+})
 
 
 app.listen(port, () => {

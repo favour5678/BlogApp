@@ -102,7 +102,7 @@ export const Login = () => {
           <div className="mt-6">
             <p className="text-sm">
               Don't have an account?
-              <Link to={"/createAccount"} className="font-semibold">
+              <Link to={"/createAccount"} className="font-semibold hover:underline underline-offset-1">
                 Create Account
               </Link>
             </p>
