@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 export const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -19,15 +22,30 @@ export const CreateAccount = () => {
       });
 
       if (response.status === 200) {
-        console.log("Registration successful");
-        return navigate('/login')
+        setSuccessMessage("Registration successful");
+        setErrorMessage("");
+
+        setTimeout(() => {
+          setSuccessMessage("");
+          return navigate('/login')
+        }, 3000);
 
       } else {
         const errorData = await response.json();
-        console.error("Registration failed:", errorData.message);
+        setErrorMessage(`${errorData.message}`);
+        setSuccessMessage(null);
+
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 3000);
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      setErrorMessage(`Error: ${error.message}`);
+      setSuccessMessage(null); 
+
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
     }
   };
 
@@ -36,6 +54,16 @@ export const CreateAccount = () => {
       <Navbar />
       <div className="mt-32">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
+          {successMessage !== "" && (
+            <strong className="flex justify-center text-[#888888] mb-1">
+              {successMessage}
+            </strong>
+          )}
+          {errorMessage !== "" && (
+            <strong className="flex justify-center text-[#888888] mb-1">
+              {errorMessage}
+            </strong>
+          )}
           <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label htmlFor="username" className="font-semibold text-lg">
