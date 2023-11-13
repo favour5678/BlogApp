@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
+  const [username, setUsername] = useState(null)
+
+  useEffect(() => {
+    fetch('http://localhost:4000/profile', {
+      credentials: 'include'
+    }).then(response => {
+      response.json().then(userInfo => {
+        setUsername(userInfo.username)
+      })
+    })
+  }, [])
+
   return (
     <nav className="bg-[#F9F9F9] container max-w-full shadow-md">
       <div className="flex justify-around items-center h-[60px]">

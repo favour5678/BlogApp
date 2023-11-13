@@ -2,6 +2,9 @@ const cors = require('cors');
 const express = require('express');
 const port = 4000;
 const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
+
+const secretKey = 'abcdefghijklmnop'
 
 const registerRoute = require('./routes/RegisterRoute');
 const loginRoute = require('./routes/loginRoute');
@@ -23,7 +26,12 @@ app.use('/login', loginRoute)
 app.use(cookieParser())
 
 app.get('/profile', (req, res) => {
-    res.json(req.cookies)
+    const { token } = req.cookies;
+
+    jwt.verify(token, secretKey, {}, (err, info) => {
+        if(err) throw err;
+        res.json(info)
+    })
 })
 
 
