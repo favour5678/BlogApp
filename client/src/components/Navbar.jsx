@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export const Navbar = () => {
-  const [username, setUsername] = useState(null);
+  const { userInfo, setUserInfo } = useContext(UserContext)
 
   useEffect(() => {
     fetch("http://localhost:4000/profile", {
@@ -17,7 +18,7 @@ export const Navbar = () => {
       // });
       .then(response => {
         response.json().then(userInfo => {
-          setUsername(userInfo.username)
+          setUserInfo(userInfo)
         })
       })
   }, []);
@@ -27,6 +28,7 @@ export const Navbar = () => {
       credentials: 'include',
       method: 'POST'
     })
+    setUserInfo(null)
   }
 
   // useEffect(() => {
@@ -49,6 +51,7 @@ export const Navbar = () => {
 
   //   fetchUserInfo();
   // }, []);
+  const username = userInfo?.username;
 
   return (
     <nav className="bg-[#F9F9F9] container max-w-full shadow-md">

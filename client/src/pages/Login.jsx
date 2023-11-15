@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 // import Cookies from 'js-cookie'
 
 export const Login = () => {
@@ -8,6 +9,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { setUserInfo } = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -73,6 +75,9 @@ export const Login = () => {
         setSuccessMessage("Login successful");
         setErrorMessage("");
 
+        response.json().then(userInfo => {
+          setUserInfo(userInfo)
+        })
 
         setTimeout(() => {
           setSuccessMessage("");
