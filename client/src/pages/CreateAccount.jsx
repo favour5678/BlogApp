@@ -28,7 +28,7 @@ export const CreateAccount = () => {
         setTimeout(() => {
           setSuccessMessage("");
           return navigate('/login')
-        }, 3000);
+        }, 2000);
 
       } else {
         const errorData = await response.json();

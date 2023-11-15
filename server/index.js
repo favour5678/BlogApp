@@ -1,8 +1,8 @@
 const cors = require('cors');
 const express = require('express');
 const port = 4000;
-const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser')
 
 const secretKey = 'abcdefghijklmnop'
 
@@ -31,7 +31,37 @@ app.get('/profile', (req, res) => {
     jwt.verify(token, secretKey, {}, (err, info) => {
         if(err) throw err;
         res.json(info)
+        console.log(info)
     })
+})
+
+//   app.get('/profile', (req, res) => {
+//     const { token } = req.cookies;
+
+//     if(!token) {
+//         return res.status(401).json({ message: 'Unauthorized' })
+//     }
+
+//     jwt.verify(token, secretKey, (err, decoded) => {
+//         if(err) {
+//             console.error('Error verifying token:', err);
+//             return res.status(401).json({ message: 'Invalid token' })
+//         };
+        
+
+//         const { username } = decoded;
+//         console.log(decoded)
+//         if (!username) {
+//             console.error('Username not found in decoded payload');
+//             return res.status(401).json({ message: 'Invalid token structure' });
+//         }
+
+//         res.json({ user: {username}, decoded })
+//     })
+// })
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok')
 })
 
 

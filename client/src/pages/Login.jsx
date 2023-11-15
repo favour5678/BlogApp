@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
+// import Cookies from 'js-cookie'
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -10,6 +11,52 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   const values = { username, password };
+
+  //   try {
+  //     const response = await fetch("http://localhost:4000/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(values),
+  //       credentials: "include",
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json()
+  //       const token = data.token
+
+  //       Cookies.set('token', token)
+  //       setSuccessMessage("Login successful");
+  //       setErrorMessage("");
+
+
+  //       setTimeout(() => {
+  //         setSuccessMessage("");
+  //         return navigate("/");
+  //       }, 3000);
+
+  //     } else {
+  //       const data = await response.json();
+
+  //       setErrorMessage(`${data.message}`);
+  //       setSuccessMessage("");
+
+  //       setTimeout(() => {
+  //         setErrorMessage("");
+  //       }, 3000);
+  //     }
+  //   } catch (error) {
+  //     setErrorMessage(`Error: ${error.message}`);
+  //     setSuccessMessage("");
+
+  //     setTimeout(() => {
+  //       setErrorMessage("");
+  //     }, 3000);
+  //   }
+  // };
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     const values = { username, password };
@@ -26,10 +73,11 @@ export const Login = () => {
         setSuccessMessage("Login successful");
         setErrorMessage("");
 
+
         setTimeout(() => {
           setSuccessMessage("");
           return navigate("/");
-        }, 3000);
+        }, 2000);
 
       } else {
         const data = await response.json();
