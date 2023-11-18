@@ -1,5 +1,7 @@
 const express = require('express');
-const port = 4000;
+const cors = require('cors')
+const bcrypt = require('bcrypt')
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -10,11 +12,13 @@ mongoose.connect('mongodb+srv://blog:p2000oSxycAQePoz@cluster0.jqgb6sg.mongodb.n
 let db = mongoose.connection;
 db.once('open', function() {
     console.log('DATABASE CONNECTED')
-})
+}) 
 
 
 
+
+
+const port = 4000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
-  
