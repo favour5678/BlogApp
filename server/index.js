@@ -2,10 +2,12 @@ const express = require('express');
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+const User = require('./models/UserModel');
+
+const SECRET_KEY = 'secretkey';
 
 const app = express();
-
-app.use(express.json())
 
 const { default: mongoose } = require('mongoose');
 mongoose.connect('mongodb+srv://blog:p2000oSxycAQePoz@cluster0.jqgb6sg.mongodb.net/test')
@@ -14,11 +16,55 @@ db.once('open', function() {
     console.log('DATABASE CONNECTED')
 }) 
 
+app.use(bodyParser.json())
+app.use(cors())
+
+app.post('/register', async(req, res) => {
+    try {
+        const { username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10)
+        const newUser = new User({ username, password: hashedPassword})
+        await newUser.save();
+
+        res.status(201).json({ message: 'User created successfully' })
+    } catch(error) {
+        res.status(500).json({ error: 'Error signing up' })
+    }
+})
+
+app.get('/register', async (req, res) => {
+    try {
+        const users = await User.find()
+        res.status(201).json(users)
+    } catch(error) {
+        res.status(500).json({ error: 'Unable to get users'})
+    }
+})
 
 
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+
+        if(!user) {
+            return res.status(401).json({ error: 'Invalid username' })
+        }
+        
+        const validPassword = await bcrypt.compare(password, user.password)
+        if (!validPassword) {
+            return res.status(401).json({ error: 'Invalid password' })
+        }
+
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY)
+        res.json({ message: 'Login successful'})
+    } catch(error) {
+        res.status(500).json({ error: 'Error logging in'})
+    }
+})
 
 
-const port = 4000;
+const port = 5000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
