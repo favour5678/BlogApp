@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 export const Navbar = () => {
+  const { token, logOut } = useAuth();
+
   return (
     <nav className="bg-[#F9F9F9] container max-w-full shadow-md">
       <div className="flex justify-around items-center h-[60px]">
@@ -18,23 +21,29 @@ export const Navbar = () => {
           <li className="hover:underline underline-offset-4">
             <Link to={"/about"}>About</Link>
           </li>
-
-          {/* <li>
-            <Link to={"/createPost"}>Create new post</Link>
-          </li>
-          <li>
-            <Link>Log Out</Link>
-          </li> */}
-          <li>
-            <Link to={"/login"} className="button">
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link to={"/createAccount"} className="button">
-              Create Account
-            </Link>
-          </li>
+          {token ? (
+            <>
+              <li>
+                <Link to={"/createPost"} className="button">Create new post</Link>
+              </li>
+              <li>
+                <Link onClick={logOut} className='button'>Log Out</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to={"/login"} className="button">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to={"/createAccount"} className="button">
+                  Create Account
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>
