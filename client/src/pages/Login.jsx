@@ -1,125 +1,14 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Navbar } from "../components/Navbar";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-// import Cookies from 'js-cookie'
+import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const { setUserInfo } = useContext(UserContext)
-
-  const navigate = useNavigate();
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   const values = { username, password };
-
-  //   try {
-  //     const response = await fetch("http://localhost:4000/login", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(values),
-  //       credentials: "include",
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json()
-  //       const token = data.token
-
-  //       Cookies.set('token', token)
-  //       setSuccessMessage("Login successful");
-  //       setErrorMessage("");
-
-
-  //       setTimeout(() => {
-  //         setSuccessMessage("");
-  //         return navigate("/");
-  //       }, 3000);
-
-  //     } else {
-  //       const data = await response.json();
-
-  //       setErrorMessage(`${data.message}`);
-  //       setSuccessMessage("");
-
-  //       setTimeout(() => {
-  //         setErrorMessage("");
-  //       }, 3000);
-  //     }
-  //   } catch (error) {
-  //     setErrorMessage(`Error: ${error.message}`);
-  //     setSuccessMessage("");
-
-  //     setTimeout(() => {
-  //       setErrorMessage("");
-  //     }, 3000);
-  //   }
-  // };
-  
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const values = { username, password };
-
-    try {
-      const response = await fetch("http://localhost:4000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        setSuccessMessage("Login successful");
-        setErrorMessage("");
-
-        response.json().then(userInfo => {
-          setUserInfo(userInfo)
-        })
-
-        setTimeout(() => {
-          setSuccessMessage("");
-          return navigate("/");
-        }, 2000);
-
-      } else {
-        const data = await response.json();
-
-        setErrorMessage(`${data.message}`);
-        setSuccessMessage("");
-
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
-      }
-    } catch (error) {
-      setErrorMessage(`Error: ${error.message}`);
-      setSuccessMessage("");
-
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
-    }
-  };
-
   return (
     <main className="h-screen">
       <Navbar />
       <div className="mt-28">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
-          {successMessage !== "" && (
-            <strong className="flex justify-center text-[#888888] mb-1">
-              {successMessage}
-            </strong>
-          )}
-          {errorMessage !== "" && (
-            <strong className="flex justify-center text-[#888888] mb-1">
-              {errorMessage}
-            </strong>
-          )}
-          <form onSubmit={handleLogin}>
+          <form>
             <div className="mb-4">
               <label htmlFor="username" className="font-semibold text-lg">
                 Username
@@ -129,7 +18,6 @@ export const Login = () => {
                 name="username"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Your Username"
-                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="mb-8">
@@ -141,7 +29,6 @@ export const Login = () => {
                 name="password"
                 className="mt-3 w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
