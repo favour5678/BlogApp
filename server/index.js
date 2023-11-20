@@ -4,6 +4,10 @@ const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const User = require('./models/UserModel');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+const PostModel = require('./models/Post');
 
 const SECRET_KEY = 'secretkey';
 
@@ -52,6 +56,26 @@ app.post('/login', async (req, res) => {
     } catch(error) {
         res.status(500).json({ error: 'Error logging in'})
     }
+})
+
+
+app.post('/post', upload.single('file'), async (req, res) => {
+    const { originalname, path } = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1]
+
+    const newPath = path + '.' + ext;
+    fs.renameSync(path, newPath)
+
+    const { title, summary, content } = req.body;
+    const postDoc = await PostModel.create({
+        title,
+        summary,
+        content,
+        cover: newPath
+    })
+
+    res.json(postDoc)
 })
 
 
