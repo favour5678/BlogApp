@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { BlogContent } from "./BlogContent";
 import { Footer } from "../components/Footer";
 import { blogPosts } from "../data/blogData";
-import { useAuth } from "../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
   const [blogs, setBlogs] = useState(blogPosts);
-  // const navigate = useNavigate()
-
-  // const { token } = useAuth()
-
-  // useEffect(() => {
-  //   if (!token) {
-  //     return navigate('/login')
-  //   }
-  // }, [])
 
   const filterBlogCategory = (categories) => {
     setBlogs(

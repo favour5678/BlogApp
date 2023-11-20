@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider";
 
 export const Login = () => {
-  const [users, setUsers] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
   const { logIn } = useAuth()
-
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  const fetchUsers = () => {
-    axios.get('http://localhost:5000/register')
-      .then(res => {
-        console.log(res.data)
-      })
-  }
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -33,12 +21,11 @@ export const Login = () => {
       alert('Login successful')
       setUsername('')
       setPassword('')
-      fetchUsers()
       navigate('/')
       window.location.reload()
       logIn(token)
     } catch(error) {
-      console.log('Login error')
+      console.log('Login error', error)
     }
   }
 

@@ -1,41 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const CreateAccount = () => {
-  const [users, setUsers] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = () => {
-    axios.get("http://localhost:5000/register").then((res) => {
-      // console.log(res.data)
-    });
-  };
-
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/register", {
+    try {
+      await axios.post("http://localhost:5000/register", {
         username,
         password,
-      })
-      .then(() => {
-        alert("Registration Successful");
-        setUsername("");
-        setPassword("");
-        fetchUsers();
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log("Unable to register user");
       });
+
+      alert("Registration Successful");
+      setUsername("");
+      setPassword("");
+      navigate("/login");
+    } catch (error) {
+      console.error("Unable to register user", error);
+    }
   };
 
   return (
