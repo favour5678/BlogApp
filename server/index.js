@@ -67,15 +67,18 @@ app.post('/post', upload.single('file'), async (req, res) => {
     const newPath = path + '.' + ext;
     fs.renameSync(path, newPath)
 
-    const { title, summary, content } = req.body;
+    const { title, content } = req.body;
     const postDoc = await PostModel.create({
         title,
-        summary,
         content,
         cover: newPath
     })
 
     res.json(postDoc)
+})
+
+app.get('/post', async (req, res) => {
+    res.json(await PostModel.find());
 })
 
 
