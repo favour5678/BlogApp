@@ -20,8 +20,23 @@ db.once('open', function() {
     console.log('DATABASE CONNECTED')
 }) 
 
-app.use(bodyParser.json())
-app.use(cors())
+app.use(bodyParser.json());
+app.use(cors());
+
+const authenticateToken = (req, res, next) => {
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        if (err) {
+            return res.status(403).json({ error: 'Forbidden' });
+        }
+        req.user = user;
+        next();
+    });
+};
 
 app.post('/register', async(req, res) => {
     try {
@@ -59,23 +74,30 @@ app.post('/login', async (req, res) => {
 })
 
 
-app.post('/post', upload.single('file'), async (req, res) => {
-    const { originalname, path } = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1]
+app.post('/post', authenticateToken, upload.single('file'), async (req, res) => {
+    try {
+        const { originalname, path } = req.file;
+        const parts = originalname.split('.');
+        const ext = parts[parts.length - 1];
 
-    const newPath = path + '.' + ext;
-    fs.renameSync(path, newPath)
+        const newPath = path + '.' + ext;
+        fs.renameSync(path, newPath);
 
-    const { title, content } = req.body;
-    const postDoc = await PostModel.create({
-        title,
-        content,
-        cover: newPath
-    })
+        const { title, content } = req.body;
+        const postDoc = await PostModel.create({
+            title,
+            content,
+            cover: newPath,
+            author: req.user.userId, 
+        });
 
-    res.json(postDoc)
-})
+        res.json(postDoc);
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ error: 'Error creating post' });
+    }
+});
+
 
 app.get('/post', async (req, res) => {
     res.json(await PostModel.find());

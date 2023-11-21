@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 export const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -27,6 +28,8 @@ export const CreatePost = () => {
 
   const formats = ["header","bold","italic","underline","strike","blockquote","list","bullet", "indent", "link","image"];
 
+  const { token } = useAuth();
+  
   const handleCreatePost = async (e) => {
     e.preventDefault()
 
@@ -39,12 +42,13 @@ export const CreatePost = () => {
     const response = await fetch('http://localhost:5000/post', {
       method: 'POST',
       body: data,
-      // credentials: 'include'
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
     if(response.ok) {
       navigate('/')
-    }
-  
+    } 
   }
 
   return (
