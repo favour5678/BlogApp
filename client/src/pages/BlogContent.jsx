@@ -22,9 +22,10 @@ export const BlogContent = ({ blogs }) => {
   const updatedBlogPosts = blogs.map((post) => ({
     ...post,
     content: splitContent(post.content),
+    
   }));
 
-  
+
   return (
     <main className="grid grid-cols-3 gap-x-6 gap-y-12 px-10">
       {updatedBlogPosts.map((post) => (
@@ -52,7 +53,7 @@ export const BlogContent = ({ blogs }) => {
           <div key={post._id} className="w-full">
           <p>
             <img
-              src={post.cover}
+              src={'http://localhost:5000/' + post.cover}
               alt="post-img"
               className="h-72 w-full object-cover object-center rounded-md"
             />
