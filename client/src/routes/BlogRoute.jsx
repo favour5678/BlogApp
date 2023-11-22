@@ -6,6 +6,7 @@ import { CreateAccount } from '../pages/CreateAccount'
 import { BlogDetails } from '../pages/BlogDetails'
 import { blogPosts } from '../data/blogData'
 import { CreatePost } from '../pages/CreatePost'
+import { EditPost } from '../pages/EditPost'
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
     {
         path: '/blogs/:id',
         element: <BlogDetails blogPosts={ blogPosts } />
+    },
+    {
+        path: '/edit/:id',
+        element: <EditPost blogPosts={ blogPosts } />
     },
     {
         path: '/createPost',

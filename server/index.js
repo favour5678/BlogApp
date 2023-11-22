@@ -79,11 +79,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post(
-  "/post",
-  authenticateToken,
-  upload.single("file"),
-  async (req, res) => {
+app.post("/post", authenticateToken, upload.single("file"), async (req, res) => {
     try {
       const { originalname, path } = req.file;
       const parts = originalname.split(".");
