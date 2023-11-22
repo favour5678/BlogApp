@@ -38,7 +38,7 @@ const authenticateToken = (req, res, next) => {
       return res.status(403).json({ error: "Forbidden" });
     }
     req.user = user;
-    next();
+    next(); 
   });
 };
 
@@ -79,6 +79,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
 app.post("/post", authenticateToken, upload.single("file"), async (req, res) => {
     try {
       const { originalname, path } = req.file;
@@ -94,18 +95,31 @@ app.post("/post", authenticateToken, upload.single("file"), async (req, res) => 
         content,
         cover: newPath,
         author: req.user.userId,
-      });
-
-      res.json(postDoc);
-    } catch (error) {
-      console.error("Error creating post:", error);
-      res.status(500).json({ error: "Error creating post" });
+    });
+    
+    res.json(postDoc);
+} catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Error creating post" });
     }
-  }
+}
 );
 
+app.put('/post', upload.single("file"), async (req, res) => {
+    let newPath = null;
+    if(req.file) {
+        const { originalname, path } = req.file;
+        const parts = originalname.split(".");
+        const ext = parts[parts.length - 1];
+
+        newPath = path + "." + ext;
+        fs.renameSync(path, newPath);
+
+    }
+})
+
 app.get("/post", async (req, res) => {
-  res.json(
+    res.json(
     await PostModel.find()
       .populate("author", ["username"])
       .sort({ createdAt: -1 })
@@ -119,6 +133,7 @@ app.get('/post/:id', async (req, res) => {
 
     res.json(postDoc)
 })
+
 
 const port = 5000;
 app.listen(port, () => {
