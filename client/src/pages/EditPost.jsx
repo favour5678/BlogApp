@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar';
 import { Editor } from '../components/Editor';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthProvider';
 
 export const EditPost = () => {
     const {id} = useParams()
@@ -9,6 +10,8 @@ export const EditPost = () => {
     const [content, setContent] = useState("");
     const [files, setFiles] = useState('');
     const navigate = useNavigate();
+
+    const { token } = useAuth();
 
   useEffect(() => {
     fetch('http://localhost:5000/post/' + id)
@@ -27,13 +30,17 @@ export const EditPost = () => {
 
     data.set("title", title);
     data.set("content", content);
+    data.set('id', id)
     if(files?.[0]) {
         data.set("file", files?.[0]);
     }
 
     const response = await fetch('http://localhost:5000/post', {
         method: 'PUT',
-        body: data
+        body: data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
     })
     if(response.ok) {
         navigate('/blogs/' + id)

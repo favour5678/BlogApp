@@ -105,7 +105,7 @@ app.post("/post", authenticateToken, upload.single("file"), async (req, res) => 
 }
 );
 
-app.put('/post', upload.single("file"), async (req, res) => {
+app.put('/post', authenticateToken, upload.single("file"), async (req, res) => {
     let newPath = null;
     if(req.file) {
         const { originalname, path } = req.file;
@@ -115,7 +115,19 @@ app.put('/post', upload.single("file"), async (req, res) => {
         newPath = path + "." + ext;
         fs.renameSync(path, newPath);
 
-    }
+        const { id, title, content } = req.body;
+        const postDoc = await PostModel.findById(id)
+
+        const user = req.user;
+
+        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(user.userId)
+        if(isAuthor) {
+          return res.status(400).json('You are not the author')
+        }
+
+        await postDoc.update({ title, content, cover: newPath ? newPath : postDoc.cover })
+        res.json(postDoc)
+    }   
 })
 
 app.get("/post", async (req, res) => {
