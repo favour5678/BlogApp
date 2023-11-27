@@ -121,11 +121,11 @@ app.put('/post', authenticateToken, upload.single("file"), async (req, res) => {
         const user = req.user;
 
         const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(user.userId)
-        if(isAuthor) {
+        if(!isAuthor) {
           return res.status(400).json('You are not the author')
         }
 
-        await postDoc.update({ title, content, cover: newPath ? newPath : postDoc.cover })
+        await postDoc.updateOne({ title, content, cover: newPath ? newPath : postDoc.cover })
         res.json(postDoc)
     }   
 })
