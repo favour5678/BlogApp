@@ -28,7 +28,7 @@ export const CreateAccount = () => {
   return (
     <main className="h-screen">
       <Navbar />
-      <div className="mt-32">
+      <div className="pt-40">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
           <form onSubmit={handleRegister}>
             <div className="mb-4">

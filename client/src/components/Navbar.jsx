@@ -6,7 +6,7 @@ export const Navbar = () => {
   const { token, logOut } = useAuth();
 
   return (
-    <nav className="bg-[#F9F9F9] container max-w-full shadow-md">
+    <nav className="bg-[#F9F9F9] fixed top-0  container max-w-full shadow-md shadow-gray-400">
       <div className="flex justify-around items-center h-[60px]">
         <Link
           to={"/"}

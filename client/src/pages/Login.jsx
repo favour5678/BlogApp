@@ -33,7 +33,7 @@ export const Login = () => {
   return (
     <main className="h-screen">
       <Navbar />
-      <div className="mt-28">
+      <div className="pt-32">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
           <form onSubmit={handleLogin}>
             <div className="mb-4">

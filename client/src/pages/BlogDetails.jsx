@@ -28,7 +28,7 @@ export const BlogDetails = ({ blogPosts }) => {
     <main className="h-full">
       <Navbar />
       {selectedPost && (
-        <article className="container mx-auto w-[90%] mt-10">
+        <article className="container mx-auto w-[90%] pt-24">
           <div className="text-center">
             <h2 className="font-bold text-2xl tracking-wide">
               {selectedPost.title}
@@ -51,7 +51,7 @@ export const BlogDetails = ({ blogPosts }) => {
         </article>
       )}
 
-      <article className="container mx-auto w-[90%] mt-10">
+      <article className="container mx-auto w-[90%] pt-24">
         <div className="text-center">
           <h2 className="font-bold text-2xl tracking-wide">{postInfo.title}</h2>
           <p className="text-sm">{format(new Date(), "dd-MM-yyyy")}</p>

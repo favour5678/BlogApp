@@ -19,7 +19,7 @@ export const HomePage = () => {
     <main>
       <Navbar />
       <div>
-        <h1 className="text-center mt-10 text-2xl font-bold tracking-wide text-[#888888]">
+        <h1 className="text-center pt-24 text-2xl font-bold tracking-wide text-[#888888]">
           Welcome to F.A's Blog, the home of News
         </h1>
         <h1 className="mt-16 ml-12 text-3xl font-bold tracking-wide text-[#888888]">

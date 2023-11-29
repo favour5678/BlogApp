@@ -38,7 +38,7 @@ export const CreatePost = () => {
       <Navbar />
       <form
         onSubmit={handleCreatePost}
-        className="flex flex-col items-center mt-20 space-y-6"
+        className="flex flex-col items-center pt-36 space-y-6"
       >
         <input
           type="text"
