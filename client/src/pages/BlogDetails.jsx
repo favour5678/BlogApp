@@ -32,7 +32,7 @@ export const BlogDetails = ({ blogPosts }) => {
       {selectedPost && (
         <article className="container mx-auto w-[90%] pt-24">
           <div className="text-center">
-            <h2 className="font-bold text-2xl tracking-wide">
+            <h2 className="font-bold text-lg sm:text-xl md:text-2xl tracking-wide">
               {selectedPost.title}
             </h2>
             <p className="text-sm">{format(new Date(), "dd-MM-yyyy")}</p>
@@ -41,11 +41,11 @@ export const BlogDetails = ({ blogPosts }) => {
               <img
                 src={selectedPost.image}
                 alt="post-img"
-                className="w-[100%] h-[60vh] object-cover object-center"
+                className="w-[100%] md:h-[60vh] object-cover object-center"
               />
             </p>
             {splitContent(selectedPost.content).map((paragraph, index) => (
-              <p key={index} className="tracking-wide mt-2 text-left">
+              <p key={index} className="tracking-normal md:tracking-wide mt-1 md:mt-2 text-left">
                 {paragraph}
               </p>
             ))}
@@ -56,7 +56,7 @@ export const BlogDetails = ({ blogPosts }) => {
       {postInfo && (
         <article className="container mx-auto w-[90%] pt-24">
           <div className="text-center">
-            <h2 className="font-bold text-2xl tracking-wide">
+            <h2 className="font-bold text-lg sm:text-xl md:text-2xl tracking-wide">
               {postInfo.title}
             </h2>
             <p className="text-sm">{format(new Date(), "dd-MM-yyyy")}</p>
@@ -65,19 +65,19 @@ export const BlogDetails = ({ blogPosts }) => {
             </p>
             <Link
               to={`/edit/${postInfo._id}`}
-              className="button w-[10%] mt-5 space-x-1 flex justify-center mx-auto items-center font-semibold"
+              className="button w-[20%] md:w-[10%] mt-5 space-x-1 flex justify-center mx-auto items-center font-semibold"
             >
               <HiOutlinePencilSquare />
-              <button>Edit Post</button>
+              <button className="text-sm md:text-base">Edit Post</button>
             </Link>
             <p className="w-[60%] my-8 mx-auto">
               <img
                 src={"http://localhost:5000/" + postInfo.cover}
                 alt="post-img"
-                className="w-[100%] h-[60vh] object-cover object-center"
+                className="w-[100%] md:h-[60vh] object-cover object-center"
               />
             </p>
-            <p dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+            <p dangerouslySetInnerHTML={{ __html: postInfo.content }} className="tracking-normal md:tracking-wide mt-1 md:mt-2 text-left" />
           </div>
         </article>
       )}

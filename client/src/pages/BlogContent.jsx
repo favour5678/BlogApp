@@ -29,14 +29,14 @@ export const BlogContent = ({ blogs }) => {
   }));
 
   return (
-    <main className="grid grid-cols-3 gap-x-6 gap-y-12 px-10">
+    <main className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12 px-10">
       {[...updatedBlogPosts, ...createdPosts].map((post) => (
         <div key={post.id || post._id} className="w-full">
           <p>
             <img
               src={post.image || `http://localhost:5000/${post.cover}`}
               alt="post-img"
-              className="h-72 w-full object-cover object-center rounded-md"
+              className="h-52 md:h-72 w-[70%] md:w-full object-cover object-center rounded-md"
             />
           </p>
           <p className="mt-3 text-sm">
@@ -45,10 +45,10 @@ export const BlogContent = ({ blogs }) => {
               "dd-MM-yyyy"
             )}
           </p>
-          <h2 className="font-semibold text-lg pt-2 tracking-wide">
+          <h2 className="font-semibold text-base md:text-lg pt-2 tracking-wide">
             {post.title}
           </h2>
-          <Link to={`/blogs/${post.id || post._id}`} className="pt-2">
+          <Link to={`/blogs/${post.id || post._id}`} className="pt-2 text-sm md:text-base">
             {post.content && post.content[0]}
             <small className="text-sm font-semibold hover:underline underline-offset-2">
               Read More....
