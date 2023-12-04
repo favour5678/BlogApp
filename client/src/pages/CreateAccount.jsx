@@ -6,21 +6,36 @@ import { useNavigate } from "react-router-dom";
 export const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (!username || !password) {
+      setErrorMessage("Username & Password are required");
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000)
+      return;
+    }
+
     try {
       await axios.post("http://localhost:5000/register", {
         username,
         password,
       });
 
-      alert("Registration Successful");
+      setSuccessMessage("Registration Successful");
       setUsername("");
       setPassword("");
-      navigate("/login");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000)
     } catch (error) {
+      setErrorMessage("Unable to register user. Please try again.");
       console.error("Unable to register user", error);
     }
   };
@@ -30,6 +45,14 @@ export const CreateAccount = () => {
       <Navbar />
       <div className="pt-40">
         <div className="max-w-md w-full mx-auto bg-[#F9F9F9] p-8 rounded-md shadow-xl">
+          {errorMessage && (
+            <small className="text-red-400 font-semibold flex justify-center text-base">{errorMessage}</small>
+          )}
+          {successMessage && (
+            <small className="text-green-400 font-semibold flex justify-center text-base">
+              {successMessage}
+            </small>
+          )}
           <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label htmlFor="username" className="font-semibold text-lg">

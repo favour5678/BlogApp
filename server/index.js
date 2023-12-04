@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
+
 const authenticateToken = (req, res, next) => {
   const token =
     req.headers.authorization && req.headers.authorization.split(" ")[1];
@@ -41,6 +42,7 @@ const authenticateToken = (req, res, next) => {
     next(); 
   });
 };
+
 
 app.post("/register", async (req, res) => {
   try {
