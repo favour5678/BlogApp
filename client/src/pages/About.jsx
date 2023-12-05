@@ -3,10 +3,10 @@ import { Navbar } from "../components/Navbar";
 
 export const About = () => {
   return (
-    <main className="pt-24 h-screen">
+    <main className="pt-24 h-screen md:h-screen">
       <Navbar />
-      <div className="w-[50%] mx-auto mt-20">
-      <div className="text-xl font-semibold tracking-wide leading-loose text-[#888888]">
+      <div className="w-[70%] md:w-[50%] mx-auto mt-5 md:mt-20">
+      <div className="text-base md:text-xl font-semibold tracking-wide leading-loose text-[#888888]">
         Hey there! I'm Favour, the creative mind behind F.A's Blog. Welcome to
         my digital space! I'm all about bringing you various categories on this
         blog, where you'll find the latest trending news from around the world.

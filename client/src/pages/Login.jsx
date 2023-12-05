@@ -64,7 +64,7 @@ export const Login = () => {
           )}
           <form onSubmit={handleLogin}>
             <div className="mb-4">
-              <label htmlFor="username" className="font-semibold text-lg">
+              <label htmlFor="username" className="font-semibold text-base md:text-lg">
                 Username
               </label>
               <input
@@ -77,7 +77,7 @@ export const Login = () => {
               />
             </div>
             <div className="mb-8">
-              <label htmlFor="password" className="font-semibold text-lg">
+              <label htmlFor="password" className="font-semibold text-base md:text-lg">
                 Password
               </label>
               <input
@@ -91,7 +91,7 @@ export const Login = () => {
             </div>
             <button
               type="submit"
-              className="button w-full font-semibold text-lg"
+              className="button w-full font-semibold text-base md:text-lg"
             >
               Login
             </button>
